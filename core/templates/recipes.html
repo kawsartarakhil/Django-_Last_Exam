@@ -1,0 +1,82 @@
+{% extends "core_base.html" %}
+{% load static %}
+{% block title %}Recipes | DietSync{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recipes.css' %}">
+{% endblock %}
+{% block content %}
+<section class="recipes-page">
+<div class="rp-container">
+<div class="rp-header">
+<div class="rp-header-text">
+<h1>The Recipe Archive</h1>
+<p>Nourishing recipes with clear nutrition details. Search by name or filter by meal type and nutrition goal to find what fits your day.</p>
+</div>
+<div class="rp-count">
+<strong>{{ recipes|length }}</strong>
+<span>{{ recipes|length|pluralize:"recipe,recipes" }} found</span>
+</div>
+</div>
+<div class="rp-controls">
+<form method="get" action="{% url 'recipes' %}" class="rp-search">
+<input type="text" name="q" value="{{ q }}" placeholder="Search recipes by name...">
+<input type="hidden" name="meal_type" value="{{ meal_type }}">
+<input type="hidden" name="nutrition" value="{{ nutrition }}">
+<button type="submit">Search</button>
+</form>
+<div class="rp-filter-group">
+<span class="rp-filter-label">Meal type</span>
+<div class="rp-pills">
+<a href="{% url 'recipes' %}?q={{ q|urlencode }}&nutrition={{ nutrition }}" class="rp-pill {% if not meal_type %}active{% endif %}">All</a>
+{% for value, label in meal_types %}
+<a href="{% url 'recipes' %}?q={{ q|urlencode }}&meal_type={{ value }}&nutrition={{ nutrition }}" class="rp-pill {% if meal_type == value %}active{% endif %}">{{ label }}</a>
+{% endfor %}
+</div>
+</div>
+<div class="rp-filter-group">
+<span class="rp-filter-label">Nutrition goal</span>
+<div class="rp-pills">
+<a href="{% url 'recipes' %}?q={{ q|urlencode }}&meal_type={{ meal_type }}" class="rp-pill {% if not nutrition %}active{% endif %}">All</a>
+{% for value, label in nutrition_categories %}
+<a href="{% url 'recipes' %}?q={{ q|urlencode }}&meal_type={{ meal_type }}&nutrition={{ value }}" class="rp-pill {% if nutrition == value %}active{% endif %}">{{ label }}</a>
+{% endfor %}
+</div>
+</div>
+</div>
+{% if recipes %}
+<div class="rp-grid">
+{% for recipe in recipes %}
+<article class="rp-card">
+<div class="rp-media">
+{% if recipe.image %}
+<img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+{% else %}
+<div class="rp-media-blank"></div>
+{% endif %}
+<div class="rp-chips">
+{% if recipe.protein %}<span>{{ recipe.protein }}g protein</span>{% endif %}
+{% if recipe.calories %}<span>{{ recipe.calories }} kcal</span>{% endif %}
+</div>
+</div>
+<div class="rp-body">
+<div class="rp-tags">
+{% if recipe.meal_type %}<span class="rp-tag">{{ recipe.get_meal_type_display }}</span>{% endif %}
+{% if recipe.nutrition_category %}<span class="rp-tag rp-tag-alt">{{ recipe.get_nutrition_category_display }}</span>{% endif %}
+</div>
+<h3>{{ recipe.title }}</h3>
+<p class="rp-desc">{{ recipe.description|truncatewords:20 }}</p>
+<a href="/recipes/{{ recipe.pk }}/" class="rp-btn">View Recipe</a>
+</div>
+</article>
+{% endfor %}
+</div>
+{% else %}
+<div class="rp-empty">
+<h3>No recipes match your search</h3>
+<p>Try a different name or clear the filters to see all recipes.</p>
+<a href="{% url 'recipes' %}" class="rp-btn">Clear filters</a>
+</div>
+{% endif %}
+</div>
+</section>
+{% endblock %}

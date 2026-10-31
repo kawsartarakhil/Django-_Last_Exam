@@ -1,0 +1,180 @@
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}About Us | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="container hero-grid">
+
+        <div class="hero-text fade-in">
+            <h1>Our Story.<br><span>Our Purpose.</span></h1>
+
+            <p>
+                DietSync was created to make everyday nutrition easier,
+                simpler, and more personal. We believe that eating well
+                should not feel complicated.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/recipes/" class="btn btn-primary">Explore Recipes</a>
+                <a href="/accounts/register/" class="btn btn-ghost">Join Us</a>
+            </div>
+        </div>
+
+        <div class="hero-visual fade-in">
+            <div class="hero-image">
+                <img src="/media/web_pics/about.jpg" alt="Healthy food and fresh ingredients">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="mission">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>Our Mission</h2>
+            <p>
+                Helping people build healthier everyday habits
+                through simple and accessible nutrition tools.
+            </p>
+        </div>
+
+        <div class="mission-content">
+            <p>
+                We know that planning meals, finding recipes, and
+                organizing groceries can take time. DietSync brings
+                these things together in one place.
+            </p>
+
+            <p>
+                Our goal is to help users discover meals they enjoy,
+                organize their food choices, and make everyday
+                decisions with more confidence.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="features">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>What We Offer</h2>
+            <p>Simple tools designed to make your daily routine easier.</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">01</div>
+                <h3>Personal Profiles</h3>
+                <p>
+                    Create a nutrition profile with your preferences
+                    and personal goals.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">02</div>
+                <h3>Recipe Collection</h3>
+                <p>
+                    Discover different recipes with ingredients
+                    and useful nutrition information.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">03</div>
+                <h3>Meal Suggestions</h3>
+                <p>
+                    Get meal ideas based on ingredients you already
+                    have available.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">04</div>
+                <h3>Grocery Lists</h3>
+                <p>
+                    Organize the ingredients you need and keep
+                    track of your shopping.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="values">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>What We Believe In</h2>
+            <p>
+                Good nutrition should be practical, balanced,
+                and easy to understand.
+            </p>
+        </div>
+
+        <div class="steps-grid">
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Simplicity</h3>
+                <p>
+                    Making everyday meal planning easier
+                    without unnecessary complications.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Balance</h3>
+                <p>
+                    Encouraging a flexible approach to food
+                    and everyday nutrition.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Personalization</h3>
+                <p>
+                    Recognizing that everyone's preferences
+                    and needs are different.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="cta">
+    <div class="container">
+        <div class="cta-box">
+            <h2>Make Everyday Nutrition Simpler.</h2>
+            <p>
+                Discover recipes, organize your meals,
+                and make DietSync part of your routine.
+            </p>
+
+            <a href="/accounts/register/" class="btn btn-light">
+                Get Started
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
