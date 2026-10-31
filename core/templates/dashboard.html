@@ -1,0 +1,178 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}Dashboard | Diet Sync{% endblock %}
+
+{% block page_heading %}Overview{% endblock %}
+
+{% block content %}
+
+<div class="welcome-section">
+    <div>
+        <h1>Welcome back, {{ user.username }}!</h1>
+        <p>Here's your personal nutrition overview.</p>
+    </div>
+    {% comment %} <a href="{% url 'profile' %}" class="edit-profile-btn">Edit Profile</a> {% endcomment %}
+</div>
+
+
+
+<div class="dashboard-stats">
+
+    <div class="stat-card">
+        <h3>Favorite Recipes</h3>
+        <p class="stat-number">{{ favorites_count }}</p>
+        <span>Saved recipes</span>
+    </div>
+
+    <div class="stat-card">
+        <h3>Grocery Items</h3>
+        <p class="stat-number">{{ grocery_count }}</p>
+        <span>Items to purchase</span>
+    </div>
+
+    <div class="stat-card">
+        <h3>Your Goal</h3>
+
+        {% if profile %}
+            <p class="stat-number">
+                {{ profile.get_goal_display }}
+            </p>
+        {% else %}
+            <p class="stat-number">Not set</p>
+        {% endif %}
+
+        <span>Nutrition goal</span>
+    </div>
+
+</div>
+
+
+<div class="dashboard-section">
+
+    <div class="section-heading">
+        <h2>Your Nutrition Profile</h2>
+        {% comment %} <a href="{% url 'profile' %}">Edit Profile</a> {% endcomment %}
+    </div>
+
+    {% if profile %}
+
+        <div class="profile-cards">
+
+            <div class="info-card">
+                <span>Age</span>
+                <h3>{{ profile.age }} years</h3>
+            </div>
+
+            <div class="info-card">
+                <span>Gender</span>
+                <h3>{{ profile.get_gender_display }}</h3>
+            </div>
+
+            <div class="info-card">
+                <span>Height</span>
+                <h3>{{ profile.height }} cm</h3>
+            </div>
+
+            <div class="info-card">
+                <span>Weight</span>
+                <h3>{{ profile.weight }} kg</h3>
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+            <p>You haven't completed your nutrition profile yet.</p>
+            {% comment %} <a href="{% url 'profile' %}">Complete Your Profile</a> {% endcomment %}
+        </div>
+
+    {% endif %}
+
+</div>
+
+<div class="dashboard-section">
+
+    <h2>Your BMI Information</h2>
+
+    <div class="bmi-card">
+
+        {% if bmi %}
+            <p>Your calculated BMI</p>
+            <h3>{{ bmi }}</h3>
+            <span>This number is an indicator, not a diagnosis.</span>
+        {% else %}
+            <p>Complete your nutrition profile to calculate your BMI.</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-section">
+
+    <div class="section-heading">
+        <h2>Featured Recipes</h2>
+        <a href="{% url 'recipes' %}">View All Recipes</a>
+    </div>
+
+    <div class="recipe-grid">
+
+        {% for recipe in recipes %}
+
+            <div class="recipe-card">
+
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+
+                <div class="recipe-card-content">
+
+                    <h3>{{ recipe.title }}</h3>
+
+                    <p>{{ recipe.description|truncatewords:15 }}</p>
+
+                    <a href="{% url 'recipes' %}">Explore Recipes</a>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <p>No featured recipes available yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-section">
+
+    <h2>Quick Access</h2>
+
+    {% comment %} <div class="quick-links">
+
+        <a href="{% url 'meal_suggestions' %}">
+            <h3>Meal Suggestions</h3>
+            <p>Find recipes using your ingredients.</p>
+        </a>
+
+        <a href="{% url 'grocery_list' %}">
+            <h3>Grocery List</h3>
+            <p>Manage your shopping items.</p>
+        </a>
+
+        <a href="{% url 'favorites' %}">
+            <h3>My Favorites</h3>
+            <p>See your saved recipes.</p>
+        </a>
+
+        {% endcomment %}
+
+    </div>
+
+</div>
+
+{% endblock %}

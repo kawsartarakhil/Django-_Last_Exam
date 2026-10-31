@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Diet Sync Dashboard{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <h2>Diet Sync</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="{% url 'dashboard' %}">Overview</a>
+
+                {% comment %} <a href="{% url 'meal_suggestions' %}">Meal Suggestions</a> {% endcomment %}
+
+                <a href="{% url 'recipes' %}">Recipes</a>
+
+                {% comment %} <a href="{% url 'favorites' %}">Favorites</a>
+
+                <a href="{% url 'grocery_list' %}">Grocery List</a>
+
+                <a href="{% url 'profile' %}">My Profile</a> {% endcomment %}
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="dashboard-header">
+                <h2>{% block page_heading %}Dashboard{% endblock %}</h2>
+            </header>
+
+            <section class="dashboard-content">
+                {% block content %}
+                {% endblock %}
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
