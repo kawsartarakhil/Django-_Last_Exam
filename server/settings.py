@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -118,12 +119,28 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRSS = [BASE_DIR/"static"]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
 MAILERS = {
     'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        'OPTIONS': {
+            'host': 'smtp.gmail.com',
+            'port': 587,
+            'use_tls': True,
+            'username': 'kawsartarakhil9@gmail.com',
+            'password': 'qzlm tcvc dqrd jokv',
+        },
     },
 }
+
+DEFAULT_FROM_EMAIL = 'kawsartarakhil9@gmail.com'
+SITE_URL = 'http://127.0.0.1:8000'
+
+
+AUTH_USER_MODEL = 'accounts.CustomUser'

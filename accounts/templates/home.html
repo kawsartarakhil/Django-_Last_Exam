@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+
+<button><a href="{% url 'change_password' %}">Change_password</a></button>
+
+{% endblock %}

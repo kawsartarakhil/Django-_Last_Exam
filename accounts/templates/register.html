@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+
+<h1>Registration</h1>
+
+<form method="POST">
+{% csrf_token %}
+<label for="username">Username</label>
+<input type="text" name="username" id="username" required>
+<br><br>
+
+<label for="email">Email</label>
+<input type="text" name="email" id="email" required>
+<br><br>
+
+<label for="passwword1">Password</label>
+<input type="password" name="password1" id="password1" required>
+<br><br>
+
+<label for="password2">Confirm Password</label>
+<input type="password" name="password2" id="password2" required>
+<br><br>
+
+<button type="submit">Register</button>
+<p class="auth-bottom">
+    Didn't get the token?
+    <a href="{% url 'resend_email' %}">Resend confirmation email</a>
+</p>
+</form>
+
+
+{% endblock %}
