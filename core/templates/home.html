@@ -1,0 +1,146 @@
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}DietSync | Good Food. Better Everyday.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text fade-in">
+            <h1>Good Food.<br><span>Better Everyday.</span></h1>
+            <p>DietSync turns what you like and what you need into simple daily meal ideas. Build a nutrition profile, discover recipes, and shop with a clear grocery list.</p>
+    <div class="hero-buttons">
+        <a href="/accounts/register/" class="btn btn-primary">Get Started</a>
+        <a href="/recipes/" class="btn btn-ghost">Explore Recipes</a>
+    </div>
+        </div>
+<div class="hero-visual fade-in">
+<div class="hero-image">
+<img src="/media/web_pics/hero_pic.png" alt="">
+</div>
+</div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="section-head">
+            <h2>Eating well, made simple</h2>
+            <p>Everything you need to plan meals around your own body and your own kitchen.</p>
+        </div>
+        <div class="feature-grid">
+        <div class="feature-card">
+        <div class="feature-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5 12H2M22 12h-3M7 7 5 5M17 7l2-2"/><path d="M9 18h6M10 21h4M8.5 14.5A5 5 0 1 1 15.5 14.5c-.8.7-1.5 1.5-1.5 2.5h-4c0-1-.7-1.8-1.5-2.5Z"/></svg>
+        </div>
+        <h3>Smart Meal Suggestions</h3>
+        <p>Get meal ideas that fit your goals and tastes.</p>
+        </div>
+        <div class="feature-card">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0Z"/><path d="M8 7c0-1.5 1-1.5 1-3M12 7c0-1.5 1-1.5 1-3M16 7c0-1.5 1-1.5 1-3"/></svg>
+</div>
+<h3>Explore Recipes</h3>
+<p>Browse recipes with clear nutrition details.</p>
+        </div>
+        <div class="feature-card">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+</div>
+<h3>Personal Nutrition Profile</h3>
+<p>Set your details once and keep your plan personal.</p>
+        </div>
+        <div class="feature-card">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2"/></svg>
+</div>
+<h3>Grocery List</h3>
+<p>Turn your recipes into a ready shopping list.</p>
+        </div>
+        </div>
+    </div>
+</section>
+
+<section class="recipes">
+<div class="container">
+<div class="section-head section-head-row">
+<div>
+<h2>Featured Recipes</h2>
+<p>Hand-picked meals from our kitchen.</p>
+</div>
+<a href="/recipes/" class="text-link">View all recipes</a>
+</div>
+{% if recipes %}
+<div class="recipe-grid">
+{% for recipe in recipes %}
+<article class="recipe-card">
+<div class="recipe-media">
+{% if recipe.image %}
+<img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+{% else %}
+<div class="recipe-media-blank"></div>
+{% endif %}
+</div>
+<div class="recipe-body">
+<h3>{{ recipe.title }}</h3>
+<p class="recipe-desc">{{ recipe.description|truncatewords:18 }}</p>
+<div class="recipe-nutrition">
+{% if recipe.calories %}<span><strong>{{ recipe.calories }}</strong> kcal</span>{% endif %}
+{% if recipe.protein %}<span><strong>{{ recipe.protein }}g</strong> protein</span>{% endif %}
+{% if recipe.carbs %}<span><strong>{{ recipe.carbs }}g</strong> carbs</span>{% endif %}
+{% if recipe.fat %}<span><strong>{{ recipe.fat }}g</strong> fat</span>{% endif %}
+</div>
+</div>
+</article>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+<h3>No featured recipes yet</h3>
+<p>Fresh recipes are on their way. Check back soon, or browse everything we have so far.</p>
+<a href="/recipes/" class="btn btn-primary">Explore Recipes</a>
+</div>
+{% endif %}
+</div>
+</section>
+
+<section class="steps">
+<div class="container">
+<div class="section-head">
+<h2>How DietSync works</h2>
+<p>Three simple steps from sign up to your first saved meal.</p>
+</div>
+<div class="steps-grid">
+<div class="step">
+<div class="step-number">1</div>
+<h3>Create your profile</h3>
+<p>Tell us about your goals, tastes, and any foods to avoid.</p>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<h3>Discover meal ideas</h3>
+<p>See recipes and suggestions that match your profile.</p>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<h3>Save your favorite recipes</h3>
+<p>Keep the meals you love in one place for any day.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<div class="container">
+<div class="cta-box">
+<h2>Start eating better, today.</h2>
+<p>Create a free account and get your first meal ideas in minutes.</p>
+<a href="/accounts/register/" class="btn btn-light">Get Started</a>
+</div>
+</div>
+</section>
+{% endblock %}

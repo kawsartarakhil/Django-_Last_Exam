@@ -3,6 +3,7 @@ from .models import CustomUser,EmailConfirmation
 from .helpers import custom_send_email_confirmation,send_reset_password_email
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
+from .permissions import custom_login_required
 
 def register_view(request):
     if request.method == 'POST':
@@ -16,8 +17,7 @@ def register_view(request):
         
         if not email:
             return render(request,"register.html",{"error":"Email is required"})
-        print(password1)
-        print(password2)
+
         if  password1 != password2:
             return render(request,"register.html",{"error":"Password do not match"})
 
@@ -46,23 +46,28 @@ def login_view(request):
 
         login(request,user)
 
-        return HttpResponse("login works")
+        return redirect("home")
     
     return render(request,"login.html")
 
 def confirm_token_view(request, token):
-    token = EmailConfirmation.objects.get(token=token)
-    token.user.is_active = True
-    token.user.save()
-    token.delete()
+    confirmation = EmailConfirmation.objects.filter(token=token).first()
+
+    if not confirmation:
+        return HttpResponse("Invalid or expired token")
+
+    confirmation.user.is_active = True
+    confirmation.user.save()
+    confirmation.delete()
 
     return redirect("login")
 
+@custom_login_required
 def logout_view(request):
     logout(request)
     return redirect("login")
 
-
+@custom_login_required
 def change_password_view(request):
     if request.method == 'POST':
         old_password = request.POST.get("old_password")

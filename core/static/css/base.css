@@ -1,0 +1,119 @@
+:root {
+  --bg: #fdf6f0;
+  --bg-soft: #f6ebe1;
+  --surface: #ffffff;
+  --brown: #8b4a2b;
+  --brown-dark: #6f3a20;
+  --text: #2a1a12;
+  --muted: #7a655a;
+  --line: #ecdccf;
+  --radius: 16px;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Manrope", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(253, 246, 240, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-style: italic;
+}
+.logo span {
+  color: var(--brown);
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.site-nav a {
+  transition: color 0.25s ease;
+}
+.site-nav a:hover {
+  color: var(--brown);
+}
+.site-nav .nav-btn {
+  background: var(--brown);
+  color: #fff;
+  padding: 9px 20px;
+  border-radius: 999px;
+  transition: background 0.25s ease;
+}
+.site-nav .nav-btn:hover {
+  background: var(--brown-dark);
+  color: #fff;
+}
+.site-footer {
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+}
+.site-footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+}
+.footer-links {
+  display: flex;
+  gap: 28px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.footer-links a:hover {
+  color: var(--brown);
+}
+.footer-bottom {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 20px 24px 32px;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
