@@ -1,0 +1,75 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}Grocery List{% endblock %}
+
+{% block page_heading %}My Grocery List{% endblock %}
+
+{% block content %}
+
+<div class="grocery-container">
+
+    <h2>My Shopping List</h2>
+
+    <p>Add ingredients you need to buy.</p>
+
+    <form method="POST" class="grocery-form">
+        {% csrf_token %}
+
+        <input type="hidden" name="action" value="add">
+
+        <input type="text" name="name" placeholder="Ingredient name" required>
+
+        <input type="text" name="quantity" placeholder="Quantity">
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    {% for item in items %}
+
+    <div class="grocery-item">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="action" value="toggle">
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+
+            <label>
+                <input type="checkbox" onchange="this.form.submit()" {% if item.is_purchased %}checked{% endif %}>
+
+                {% if item.is_purchased %}
+                    <del>{{ item.name }}</del>
+                {% else %}
+                    {{ item.name }}
+                {% endif %}
+            </label>
+
+            <span class="grocery-quantity">
+                {{ item.quantity }}
+            </span>
+        </form>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+
+            <button type="submit" class="delete-button">
+                Delete
+            </button>
+        </form>
+
+    </div>
+
+    {% empty %}
+
+    <p class="empty-list">Your grocery list is empty.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

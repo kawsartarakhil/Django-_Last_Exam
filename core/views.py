@@ -40,6 +40,7 @@ def dashboard_view(request):
         bmi = round(profile.weight / (height_in_meters ** 2), 1)
 
     return render(request, "dashboard.html", {"profile": profile,"recipes": recipes,"favorites_count": favorites_count,"grocery_count": grocery_count,"bmi": bmi,})
+
 @login_required
 def meal_suggestions_view(request):
     suggested_recipes = []
@@ -109,3 +110,32 @@ def meal_suggestions_view(request):
     previous_suggestions = MealSuggestion.objects.filter(user=request.user).select_related("recipe").order_by("-created_at")[:20]
 
     return render(request, "meal_suggestions.html", {"suggested_recipes": suggested_recipes,"ingredients_entered": ingredients_entered,"generated_recipe": generated_recipe, "previous_suggestions": previous_suggestions,"error": error,})
+
+
+def grocery_list_view(request):
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action == "add":
+            name = request.POST.get("name", "").strip()
+            quantity = request.POST.get("quantity", "").strip()
+
+            if name:
+                GroceryItem.objects.create(user=request.user, name=name,quantity=quantity)
+
+        elif action == "toggle":
+            item_id = request.POST.get("item_id")
+            item = GroceryItem.objects.filter(id=item_id,user=request.user).first()
+
+            if item:
+                item.is_purchased = not item.is_purchased
+                item.save()
+
+        elif action == "delete":
+            item_id = request.POST.get("item_id")
+            item = GroceryItem.objects.filter(id=item_id,user=request.user).first()
+
+            if item:
+                item.delete()
+
+    items = GroceryItem.objects.filter(user=request.user)
+    return render(request, "grocery_list.html", {"items": items})
