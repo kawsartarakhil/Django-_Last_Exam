@@ -136,3 +136,10 @@
     line-height: 2;
 }
 
+
+.recipe-management {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}

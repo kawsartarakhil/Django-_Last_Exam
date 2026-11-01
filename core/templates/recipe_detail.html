@@ -71,6 +71,18 @@
                     </button>
                 </form>
 
+                {% if perms.core.can_manage_recipes %}
+    <div class="recipe-management">
+        <a href="{% url 'update_recipe' recipe.id %}" class="rp-btn">
+            Edit Recipe
+        </a>
+
+        <a href="{% url 'delete_recipe' recipe.id %}" class="rp-btn">
+            Move to Trash
+        </a>
+    </div>
+{% endif %}
+
             </div>
 
         </div>

@@ -1,0 +1,55 @@
+
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}Deleted Recipes{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/delete_recipes.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="deleted-page">
+
+    <div class="deleted-header">
+        <h1>Recipe Trash</h1>
+        <p>Recipes you've removed. Restore them or permanently delete them.</p>
+    </div>
+
+    <div class="deleted-list">
+
+        {% for recipe in recipes %}
+
+            <div class="deleted-card">
+
+                <h3>{{ recipe.title }}</h3>
+
+                <div class="deleted-actions">
+                    <a href="{% url 'restore_recipe' recipe.id %}"
+                       class="restore-btn">
+                        Restore
+                    </a>
+
+                    <a href="{% url 'hard_delete_recipe' recipe.id %}"
+                       class="permanent-btn">
+                        Permanently Delete
+                    </a>
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="deleted-empty">
+                <h3>Your trash is empty!</h3>
+                <p>No deleted recipes to show right now.</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}Remove Recipe | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recipe_crud.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="manage-page">
+    <div class="confirmation-card">
+
+        <div class="confirmation-icon">↗</div>
+
+        <span class="eyebrow">RECIPE ARCHIVE</span>
+
+        <h1>Move this recipe?</h1>
+
+        <p>
+            You're about to move <strong>{{ recipe.title }}</strong>
+            to your deleted recipes. You can restore it later.
+        </p>
+
+        <div class="form-actions">
+            <a href="{% url 'recipe_detail' recipe.id %}" class="btn-secondary">Keep Recipe</a>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger">Move to Trash</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

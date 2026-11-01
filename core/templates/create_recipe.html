@@ -1,0 +1,121 @@
+
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}Create Recipe | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recipe_crud.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="manage-page">
+    <div class="manage-container">
+
+        <a href="{% url 'recipes' %}" class="back-link">← Back to Recipes</a>
+
+        <div class="manage-heading">
+            <span class="eyebrow">THE RECIPE COLLECTION</span>
+            <h1>Create Something <span>Delicious.</span></h1>
+            <p>Add a new nourishing recipe to the DietSync archive.</p>
+        </div>
+
+        <div class="manage-card">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-section">
+                    <h2>Recipe Information</h2>
+
+                    <div class="form-group">
+                        <label>Recipe Title</label>
+                        <input type="text" name="title" placeholder="e.g. Creamy Chicken Pasta" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" placeholder="Tell us about this recipe..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Recipe Image</label>
+                        <input type="file" name="image" accept="image/*" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Ingredients & Instructions</h2>
+
+                    <div class="form-group">
+                        <label>Ingredients</label>
+                        <textarea name="ingredients" placeholder="Enter each ingredient..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cooking Instructions</label>
+                        <textarea name="instructions" placeholder="Write the cooking steps..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Nutrition Details</h2>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Calories</label>
+                            <input type="number" name="calories" min="0" placeholder="350">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Protein (g)</label>
+                            <input type="number" step="0.1" name="protein" min="0" placeholder="25">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Carbs (g)</label>
+                            <input type="number" step="0.1" name="carbs" min="0" placeholder="40">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fat (g)</label>
+                            <input type="number" step="0.1" name="fat" min="0" placeholder="12">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Meal Type</label>
+                            <select name="meal_type">
+                                <option value="">Choose meal type</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snack">Snacks</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nutrition Category</label>
+                            <select name="nutrition_category">
+                                <option value="">Choose category</option>
+                                <option value="weight_gain">Weight Gain</option>
+                                <option value="muscle_support">Muscle Support</option>
+                                <option value="balanced">Balanced Nutrition</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'recipes' %}" class="btn-secondary">Cancel</a>
+                    <button type="submit" class="btn-primary">Create Recipe ✦</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

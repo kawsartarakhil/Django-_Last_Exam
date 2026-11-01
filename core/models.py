@@ -2,6 +2,11 @@ from django.conf import settings
 from django.db import models
 
 
+class RecipeManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False)
+    
+
 class Recipe(models.Model):
     MEAL_TYPES = [
         ("breakfast", "Breakfast"),
@@ -34,6 +39,30 @@ class Recipe(models.Model):
             ("can_feature_recipes", "Can feature recipes"),
             ("can_view_all_recipes", "Can view all recipes"),
         ]
+
+    def __str__(self):
+        return self.title
+
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
+    objects = RecipeManager()
+    all_objects = models.Manager()
+
+    def delete(self):
+        from django.utils import timezone
+
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save()
+
+    def restore(self):
+        self.is_deleted = False
+        self.deleted_at = None
+        self.save()
+
+    def hard_delete(self):
+        super().delete()
 
     def __str__(self):
         return self.title

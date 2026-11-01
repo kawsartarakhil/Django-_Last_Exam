@@ -1,0 +1,38 @@
+
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}Restore Recipe | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recipe_crud.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="manage-page">
+    <div class="confirmation-card">
+
+        <div class="confirmation-icon">↺</div>
+
+        <span class="eyebrow">RESTORE RECIPE</span>
+
+        <h1>Bring It Back?</h1>
+
+        <p>
+            Restore <strong>{{ recipe.title }}</strong> to your active Recipe Archive?
+        </p>
+
+        <div class="form-actions">
+            <a href="{% url 'recipes' %}" class="btn-secondary">Cancel</a>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-primary">Restore Recipe</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

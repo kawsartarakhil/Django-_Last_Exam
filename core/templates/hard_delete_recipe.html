@@ -1,0 +1,39 @@
+
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}Permanently Delete Recipe | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recipe_crud.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="manage-page">
+    <div class="confirmation-card danger-card">
+
+        <div class="confirmation-icon">!</div>
+
+        <span class="eyebrow">PERMANENT ACTION</span>
+
+        <h1>Delete Forever?</h1>
+
+        <p>
+            <strong>{{ recipe.title }}</strong> will be permanently removed.
+            This action cannot be undone.
+        </p>
+
+        <div class="form-actions">
+            <a href="{% url 'recipes' %}" class="btn-secondary">Keep Recipe</a>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger">Delete Permanently</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

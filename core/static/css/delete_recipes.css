@@ -1,0 +1,128 @@
+
+.deleted-page {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 30px;
+    animation: pageAppear 0.7s ease;
+}
+
+.deleted-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.deleted-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--text);
+    margin-bottom: 12px;
+}
+
+.deleted-header p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.deleted-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.deleted-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 12px 35px rgba(48, 40, 32, 0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    animation: cardAppear 0.6s ease both;
+}
+
+.deleted-card:hover {
+    transform: translateY(-9px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(105, 67, 47, 0.15);
+}
+
+.deleted-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    color: var(--text);
+    margin: 0 0 22px;
+}
+
+.deleted-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.deleted-actions a {
+    text-decoration: none;
+    padding: 11px 17px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.restore-btn {
+    background: var(--brown);
+    color: white;
+}
+
+.restore-btn:hover {
+    background: var(--brown-dark);
+    transform: translateY(-3px);
+}
+
+.permanent-btn {
+    background: #f5e4dc;
+    color: #a34f37;
+}
+
+.permanent-btn:hover {
+    background: #a34f37;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.deleted-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 65px 20px;
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    color: var(--muted);
+    animation: cardAppear 0.7s ease;
+}
+
+.deleted-empty h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+@keyframes pageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

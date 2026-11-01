@@ -246,3 +246,88 @@ def recipe_detail_view(request, pk):
     recipe = Recipe.objects.get(pk=pk)
 
     return render(request, "recipe_detail.html", {"recipe": recipe})
+
+
+@custom_permission_required('core.can_manage_recipes')
+def create_recipe_view(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+        ingredients = request.POST.get("ingredients")
+        instructions = request.POST.get("instructions")
+        calories = request.POST.get("calories")
+        protein = request.POST.get("protein")
+        carbs = request.POST.get("carbs")
+        fat = request.POST.get("fat")
+        meal_type = request.POST.get("meal_type")
+        nutrition_category = request.POST.get("nutrition_category")
+
+        Recipe.objects.create( title=title, description=description, image=image, ingredients=ingredients,instructions=instructions, calories=calories, protein=protein, carbs=carbs,fat=fat, meal_type=meal_type,nutrition_category=nutrition_category)
+
+        return redirect("recipes")
+
+    return render(request, "create_recipe.html")
+
+
+
+@custom_permission_required('core.can_manage_recipes')
+def update_recipe_view(request, id):
+    recipe = Recipe.objects.get(id=id)
+
+    if request.method == "POST":
+        recipe.title = request.POST.get("title")
+        recipe.description = request.POST.get("description")
+        recipe.ingredients = request.POST.get("ingredients")
+        recipe.instructions = request.POST.get("instructions")
+        recipe.calories = request.POST.get("calories")
+        recipe.protein = request.POST.get("protein")
+        recipe.carbs = request.POST.get("carbs")
+        recipe.fat = request.POST.get("fat")
+        recipe.meal_type = request.POST.get("meal_type")
+        recipe.nutrition_category = request.POST.get("nutrition_category")
+
+        if request.FILES.get("image"):
+            recipe.image = request.FILES.get("image")
+
+        recipe.save()
+        return redirect("recipe_detail", pk=recipe.id)
+    return render(request, "update_recipe.html", {"recipe": recipe})
+
+@custom_permission_required('core.can_manage_recipes')
+def delete_recipe_view(request, id):
+    recipe = Recipe.objects.get(id=id)
+
+    if request.method == "POST":
+        recipe.delete()
+        return redirect("recipes")
+
+    return render(request, "delete_recipe.html", {"recipe": recipe})
+
+@custom_permission_required('core.can_manage_recipes')
+def restore_recipe_view(request, id):
+    recipe = Recipe.all_objects.get(id=id)
+
+    if request.method == "POST":
+        recipe.restore()
+        return redirect("recipes")
+
+    return render(request, "restore_recipe.html", {"recipe": recipe})
+
+
+@custom_permission_required('core.can_manage_recipes')
+def hard_delete_recipe_view(request, id):
+    recipe = Recipe.all_objects.get(id=id)
+
+    if request.method == "POST":
+        recipe.hard_delete()
+        return redirect("recipes")
+
+    return render(request, "hard_delete_recipe.html", {"recipe": recipe})
+
+
+@custom_permission_required('core.can_manage_recipes')
+def deleted_recipes_view(request):
+    recipes = Recipe.all_objects.filter(is_deleted=True)
+
+    return render(request, 'deleted_recipes.html', {'recipes': recipes})

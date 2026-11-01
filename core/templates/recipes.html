@@ -16,6 +16,16 @@
 <strong>{{ recipes|length }}</strong>
 <span>{{ recipes|length|pluralize:"recipe,recipes" }} found</span>
 </div>
+{% if perms.core.can_manage_recipes %}
+    <a href="{% url 'create_recipe' %}" class="rp-btn">
+        + Create Recipe
+    </a>
+{% endif %}
+{% if perms.core.can_manage_recipes %}
+    <a href="{% url 'deleted_recipes' %}" class="rp-btn">
+        View Deleted Recipes
+    </a>
+{% endif %}
 </div>
 <div class="rp-controls">
 <form method="get" action="{% url 'recipes' %}" class="rp-search">
