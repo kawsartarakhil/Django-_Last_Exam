@@ -58,6 +58,7 @@ class MealSuggestion(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="meal_suggestions")
     ingredients_entered = models.TextField()
     recipe = models.ForeignKey("Recipe",on_delete=models.CASCADE,null=True,blank=True,related_name="suggestions")
+    generated_recipe = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

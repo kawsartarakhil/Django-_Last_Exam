@@ -1,0 +1,117 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Meal Suggestions{% endblock %}
+
+{% block page_heading %}Meal Suggestions{% endblock %}
+
+{% block content %}
+
+<div class="meal-suggestions">
+
+    <div class="meal-intro">
+        <h2>Find Your Next Meal</h2>
+        <p>Enter the ingredients you have and discover something delicious.</p>
+    </div>
+
+    <form method="POST" class="ingredient-form">
+        {% csrf_token %}
+
+        <label for="ingredients">Your ingredients</label>
+
+        <textarea
+            id="ingredients"
+            name="ingredients"
+            placeholder="Example: chicken, rice, carrots"
+            required
+        >{{ ingredients_entered }}</textarea>
+
+        <div class="meal-buttons">
+            <button type="submit" name="action" value="match" class="match-button">
+                Find Existing Recipes
+            </button>
+
+            <button type="submit" name="action" value="generate" class="ai-button">
+                Generate Recipe with AI
+            </button>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="meal-error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    {% if suggested_recipes %}
+        <div class="meal-section">
+            <h2>Matching Recipes</h2>
+
+            <div class="meal-recipe-grid">
+                {% for recipe in suggested_recipes %}
+                    <div class="meal-recipe-card">
+
+                        {% if recipe.image %}
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                        {% endif %}
+
+                        <div class="meal-recipe-content">
+                            <h3>{{ recipe.title }}</h3>
+                            <p>{{ recipe.description }}</p>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if generated_recipe %}
+        <div class="meal-section">
+            <h2>Your AI-Generated Recipe</h2>
+
+            <div class="ai-recipe-card">
+                <span class="ai-recipe-label">AI GENERATED RECIPE</span>
+
+                <div class="ai-recipe-content">
+                    {{ generated_recipe|linebreaks }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="meal-section">
+        <h2>Previous Suggestions</h2>
+
+        {% for suggestion in previous_suggestions %}
+
+            <div class="previous-suggestion">
+
+                <p>
+                    <strong>Ingredients:</strong>
+                    {{ suggestion.ingredients_entered }}
+                </p>
+
+                {% if suggestion.recipe %}
+                    <h3>{{ suggestion.recipe.title }}</h3>
+                    <p>{{ suggestion.recipe.description }}</p>
+
+                {% elif suggestion.generated_recipe %}
+                    <span class="ai-recipe-label">AI GENERATED</span>
+                    <div class="ai-recipe-content">
+                        {{ suggestion.generated_recipe|linebreaks }}
+                    </div>
+
+                {% else %}
+                    <p>No matching recipe was found.</p>
+                {% endif %}
+
+            </div>
+
+        {% empty %}
+            <p class="meal-empty">You haven't made any suggestions yet.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
