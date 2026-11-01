@@ -702,3 +702,122 @@ body {
     border-radius: 12px;
 }
 
+
+
+.profile-container {
+    max-width: 850px;
+    margin: 30px auto;
+}
+
+.profile-header {
+    margin-bottom: 25px;
+}
+
+.profile-header h2 {
+    color: #1c2b24;
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.profile-header p {
+    color: #777;
+}
+
+.profile-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e9e3;
+}
+
+.profile-card h3 {
+    color: #23483b;
+    margin-bottom: 20px;
+}
+
+.profile-field {
+    margin-bottom: 18px;
+}
+
+.profile-field label {
+    display: block;
+    color: #26382f;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.profile-field input,
+.profile-field textarea,
+.profile-field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dce3dc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.profile-field input:focus,
+.profile-field textarea:focus,
+.profile-field select:focus {
+    border-color: #23483b;
+}
+
+.profile-field textarea {
+    resize: vertical;
+}
+
+.save-profile-button {
+    padding: 13px 25px;
+    background: #23483b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.save-profile-button:hover {
+    background: #18372c;
+}
+
+.profile-delete-section {
+    margin-top: 35px;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #ead2ca;
+    border-radius: 14px;
+}
+
+.profile-delete-section h3 {
+    color: #a34e3b;
+    margin-bottom: 10px;
+}
+
+.profile-delete-section p {
+    color: #777;
+    margin-bottom: 18px;
+}
+
+.delete-profile-button {
+    padding: 12px 20px;
+    background: #a34e3b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-profile-button:hover {
+    background: #873d2e;
+}
+
+.profile-error {
+    padding: 12px;
+    background: #f3e5e1;
+    color: #a34e3b;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}

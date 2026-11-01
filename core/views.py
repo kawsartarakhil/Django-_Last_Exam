@@ -162,3 +162,64 @@ def favorite_toggle_view(request, recipe_id):
 def favorites_view(request):
     favorites = Favorite.objects.filter( user=request.user).select_related("recipe")
     return render(request, "favorites.html", {"favorites": favorites})
+
+
+def profile_view(request):
+    profile = NutritionProfile.objects.filter(user=request.user).first()
+    error = ""
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action == "update":
+            username = request.POST.get("username", "").strip()
+            email = request.POST.get("email", "").strip()
+            bio = request.POST.get("bio", "").strip()
+            try:
+                age = int(request.POST.get("age"))
+                height = float(request.POST.get("height"))
+                weight = float(request.POST.get("weight"))
+                gender = request.POST.get("gender")
+                goal = request.POST.get("goal")
+                food_preferences = request.POST.get("food_preferences", "").strip()
+                allergies = request.POST.get("allergies", "").strip()
+
+                if not username or not email:
+                    raise ValueError
+
+                if age <= 0 or height <= 0 or weight <= 0:
+                    raise ValueError
+
+                if gender not in ["male", "female"]:
+                    raise ValueError
+
+                if goal not in ["lose", "maintain", "gain"]:
+                    raise ValueError
+
+                request.user.username = username
+                request.user.email = email
+                request.user.bio = bio
+                request.user.save()
+
+                if profile:
+                    profile.age = age
+                    profile.height = height
+                    profile.weight = weight
+                    profile.gender = gender
+                    profile.goal = goal
+                    profile.food_preferences = food_preferences
+                    profile.allergies = allergies
+                    profile.save()
+
+                else:
+                    NutritionProfile.objects.create(user=request.user,age=age,height=height,weight=weight,gender=gender, goal=goal, food_preferences=food_preferences, allergies=allergies)
+                return redirect("profile")
+
+            except (ValueError, TypeError):
+                error = "Please enter valid profile information."
+
+        elif action == "delete":
+            NutritionProfile.objects.filter(user=request.user ).delete()
+            return redirect("profile")
+
+    profile = NutritionProfile.objects.filter(user=request.user).first()
+
+    return render(request, "profile.html", { "profile": profile,  "error": error})
