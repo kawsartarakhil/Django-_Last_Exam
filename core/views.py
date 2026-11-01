@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Recipe , GroceryItem,Favorite,MealSuggestion
 from accounts.models import NutritionProfile
 from django.contrib.auth.decorators import login_required
@@ -139,3 +139,26 @@ def grocery_list_view(request):
 
     items = GroceryItem.objects.filter(user=request.user)
     return render(request, "grocery_list.html", {"items": items})
+
+
+@login_required
+def favorite_toggle_view(request, recipe_id):
+    recipe = Recipe.objects.filter(id=recipe_id).first()
+
+    if recipe:
+        favorite = Favorite.objects.filter( user=request.user, recipe=recipe).first()
+        if favorite:
+            favorite.delete()
+        else:
+            Favorite.objects.create(user=request.user,recipe=recipe)
+
+    if request.POST.get("next") == "favorites":
+        return redirect("favorites")
+
+    return redirect("recipes")
+
+
+
+def favorites_view(request):
+    favorites = Favorite.objects.filter( user=request.user).select_related("recipe")
+    return render(request, "favorites.html", {"favorites": favorites})

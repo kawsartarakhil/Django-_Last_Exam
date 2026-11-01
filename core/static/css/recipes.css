@@ -251,32 +251,19 @@
   margin: 0 auto 24px;
   color: var(--muted);
 }
-@media (max-width: 760px) {
-  .rp-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .rp-filter-label {
-    min-width: 100%;
-  }
+.favorite-button {
+    width: 100%;
+    padding: 11px;
+    margin-top: 10px;
+    background: #f3e5e1;
+    color: #a34e3b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
 }
-@media (max-width: 480px) {
-  .recipes-page {
-    padding: 36px 0 56px;
-  }
-  .rp-search {
-    flex-direction: column;
-  }
-  .rp-grid {
-    grid-template-columns: 1fr;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .rp-card,
-  .rp-media img,
-  .rp-btn,
-  .rp-pill {
-    transition: none;
-  }
+
+.favorite-button:hover {
+    background: #ead2ca;
 }

@@ -1,0 +1,65 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}My Favorites{% endblock %}
+
+{% block page_heading %}My Favorites{% endblock %}
+
+{% block content %}
+
+<div class="favorites-container">
+
+    <h2>My Favorite Recipes ❤️</h2>
+
+    <p>Your saved recipes in one place.</p>
+
+    <div class="favorites-grid">
+
+        {% for favorite in favorites %}
+
+        <div class="favorite-card">
+
+            {% if favorite.recipe.images %}
+                <img
+                    src="{{ favorite.recipe.images.url }}"
+                    alt="{{ favorite.recipe.title }}"
+                >
+            {% endif %}
+
+            <div class="favorite-info">
+
+                <h3>{{ favorite.recipe.title }}</h3>
+
+                <p>{{ favorite.recipe.description }}</p>
+
+                {% comment %} <a href="{% url 'recipe_detail' favorite.recipe.id %}">
+                    View Recipe
+                </a> {% endcomment %}
+
+                <form method="POST"
+                      action="{% url 'favorite_toggle' favorite.recipe.id %}">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="next" value="favorites">
+
+                    <button type="submit" class="remove-favorite">
+                        Remove from Favorites
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p class="empty-favorites">
+            You haven't added any favorite recipes yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
