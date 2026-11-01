@@ -11,7 +11,7 @@
         <h1>Welcome back, {{ user.username }}!</h1>
         <p>Here's your personal nutrition overview.</p>
     </div>
-    {% comment %} <a href="{% url 'profile' %}" class="edit-profile-btn">Edit Profile</a> {% endcomment %}
+    <a href="{% url 'profile' %}" class="edit-profile-btn">Edit Profile</a>
 </div>
 
 
@@ -51,7 +51,7 @@
 
     <div class="section-heading">
         <h2>Your Nutrition Profile</h2>
-        {% comment %} <a href="{% url 'profile' %}">Edit Profile</a> {% endcomment %}
+        <a href="{% url 'profile' %}">Edit Profile</a>
     </div>
 
     {% if profile %}
@@ -84,7 +84,7 @@
 
         <div class="empty-state">
             <p>You haven't completed your nutrition profile yet.</p>
-            {% comment %} <a href="{% url 'profile' %}">Complete Your Profile</a> {% endcomment %}
+            <a href="{% url 'profile' %}">Complete Your Profile</a>
         </div>
 
     {% endif %}
@@ -152,7 +152,7 @@
 
     <h2>Quick Access</h2>
 
-    {% comment %} <div class="quick-links">
+        <div class="quick-links">
 
         <a href="{% url 'meal_suggestions' %}">
             <h3>Meal Suggestions</h3>
@@ -169,7 +169,7 @@
             <p>See your saved recipes.</p>
         </a>
 
-        {% endcomment %}
+        
 
     </div>
 

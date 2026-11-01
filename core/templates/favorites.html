@@ -31,9 +31,9 @@
 
                 <p>{{ favorite.recipe.description }}</p>
 
-                {% comment %} <a href="{% url 'recipe_detail' favorite.recipe.id %}">
+                <a href="{% url 'recipe_detail' favorite.recipe.id %}">
                     View Recipe
-                </a> {% endcomment %}
+                </a> 
 
                 <form method="POST"
                       action="{% url 'favorite_toggle' favorite.recipe.id %}">

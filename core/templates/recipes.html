@@ -65,7 +65,7 @@
 </div>
 <h3>{{ recipe.title }}</h3>
 <p class="rp-desc">{{ recipe.description|truncatewords:20 }}</p>
-<a href="/recipes/{{ recipe.pk }}/" class="rp-btn">View Recipe</a>
+<a href="{% url 'recipe_detail' recipe.pk %}" class="rp-btn">View Recipe</a>
 <form method="POST" action="{% url 'favorite_toggle' recipe.id %}">
     {% csrf_token %}
     <button type="submit" class="favorite-button">

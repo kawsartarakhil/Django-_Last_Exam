@@ -12,4 +12,5 @@ urlpatterns = [
     path("favorites/",favorites_view,name="favorites"),
     path("profile/",profile_view, name="profile"),
     path("contact/", contact_view, name="contact"),
+    path("recipes/<int:pk>/",recipe_detail_view, name="recipe_detail"),
 ]

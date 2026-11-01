@@ -1,0 +1,101 @@
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}{{ recipe.title }} | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recipe_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="recipe-detail">
+    <div class="rd-container">
+
+        <a href="{% url 'recipes' %}" class="back-link">
+            ← Back to Recipes
+        </a>
+
+        <div class="rd-main">
+
+            <div class="rd-image">
+                {% if recipe.image %}
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                {% else %}
+                    <div class="rd-image-empty">
+                        No image available
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="rd-info">
+
+                {% if recipe.meal_type %}
+                    <span class="rd-tag">{{ recipe.get_meal_type_display }}</span>
+                {% endif %}
+
+                <h1>{{ recipe.title }}</h1>
+
+                <p class="rd-description">
+                    {{ recipe.description }}
+                </p>
+
+                <div class="rd-nutrition">
+
+                    <div>
+                        <strong>{{ recipe.calories|default:"—" }}</strong>
+                        <span>Calories</span>
+                    </div>
+
+                    <div>
+                        <strong>{{ recipe.protein|default:"—" }}{% if recipe.protein %}g{% endif %}</strong>
+                        <span>Protein</span>
+                    </div>
+
+                    <div>
+                        <strong>{{ recipe.carbs|default:"—" }}{% if recipe.carbs %}g{% endif %}</strong>
+                        <span>Carbs</span>
+                    </div>
+
+                    <div>
+                        <strong>{{ recipe.fat|default:"—" }}{% if recipe.fat %}g{% endif %}</strong>
+                        <span>Fat</span>
+                    </div>
+
+                </div>
+
+                <form method="POST" action="{% url 'favorite_toggle' recipe.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="favorite-button">
+                        ❤️ Add to Favorites
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="rd-content">
+
+            <div class="rd-card">
+                <h2>Ingredients</h2>
+
+                <div class="rd-text">
+                    {{ recipe.ingredients|linebreaks }}
+                </div>
+            </div>
+
+            <div class="rd-card">
+                <h2>Cooking Instructions</h2>
+
+                <div class="rd-text">
+                    {{ recipe.instructions|linebreaks }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

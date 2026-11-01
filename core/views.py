@@ -241,3 +241,8 @@ def contact_view(request):
 
             success = "Your message has been sent successfully!"
     return render(request, "contact.html", {"success": success, "error": error})
+
+def recipe_detail_view(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
+
+    return render(request, "recipe_detail.html", {"recipe": recipe})

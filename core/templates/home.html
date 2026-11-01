@@ -78,13 +78,15 @@
 <div class="recipe-grid">
 {% for recipe in recipes %}
 <article class="recipe-card">
-<div class="recipe-media">
+<a href="{% url 'recipe_detail' recipe.pk %}">
+    <div class="recipe-media">
 {% if recipe.image %}
 <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
 {% else %}
 <div class="recipe-media-blank"></div>
 {% endif %}
 </div>
+</a>
 <div class="recipe-body">
 <h3>{{ recipe.title }}</h3>
 <p class="recipe-desc">{{ recipe.description|truncatewords:18 }}</p>
