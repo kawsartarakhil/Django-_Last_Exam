@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render , redirect
-from .models import Recipe , GroceryItem,Favorite,MealSuggestion
+from .models import Recipe , GroceryItem,Favorite,MealSuggestion,ContactMessage
 from accounts.models import NutritionProfile
 from django.contrib.auth.decorators import login_required
 from groq import Groq
@@ -223,3 +223,21 @@ def profile_view(request):
     profile = NutritionProfile.objects.filter(user=request.user).first()
 
     return render(request, "profile.html", { "profile": profile,  "error": error})
+
+def contact_view(request):
+    success = ""
+    error = ""
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        subject = request.POST.get("subject", "").strip()
+        message = request.POST.get("message", "").strip()
+
+        if not name or not email or not subject or not message:
+            error = "Please fill in all fields."
+
+        else:
+            ContactMessage.objects.create(name=name,email=email, subject=subject, message=message)
+
+            success = "Your message has been sent successfully!"
+    return render(request, "contact.html", {"success": success, "error": error})

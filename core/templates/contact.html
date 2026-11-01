@@ -1,0 +1,143 @@
+{% extends "core_base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | DietSync{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="contact-hero">
+    <div class="container contact-hero-grid">
+
+        <div class="contact-hero-text">
+            <h1>Let's Start a <span>Conversation.</span></h1>
+
+            <p>
+                Have a question, suggestion, or feedback?
+                We'd love to hear from you. Get in touch
+                and let us know how we can help.
+            </p>
+        </div>
+
+
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>Get in Touch</h2>
+            <p>
+                Send us a message and we'll get back to you.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-info">
+
+                <h3>We'd Love to Hear From You</h3>
+
+                <p>
+                    Whether you have questions about recipes,
+                    meal suggestions, or your account,
+                    we're here to help.
+                </p>
+
+                <div class="contact-info-item">
+                    <h4>Email</h4>
+                    <p>support@dietsync.com</p>
+                </div>
+
+                <div class="contact-info-item">
+                    <h4>Our Purpose</h4>
+                    <p>
+                        Making everyday nutrition easier,
+                        simpler, and more personal.
+                    </p>
+                </div>
+
+                <div class="contact-info-item">
+                    <h4>Working Hours</h4>
+                    <p>Monday – Friday</p>
+                </div>
+
+            </div>
+
+            <div class="contact-form-card">
+
+                <h3>Send Us a Message</h3>
+
+                {% if success %}
+                    <p class="contact-success">{{ success }}</p>
+                {% endif %}
+
+                {% if error %}
+                    <p class="contact-error">{{ error }}</p>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="contact-field">
+                        <label>Your Name</label>
+                        <input type="text" name="name"
+                               placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label>Email Address</label>
+                        <input type="email" name="email"
+                               placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label>Subject</label>
+                        <input type="text" name="subject"
+                               placeholder="What is your message about?" required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label>Message</label>
+                        <textarea name="message" rows="5"
+                                  placeholder="Write your message here..."
+                                  required></textarea>
+                    </div>
+
+                    <button type="submit" class="contact-submit">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="contact-bottom">
+    <div class="container">
+        <div class="contact-bottom-box">
+
+            <h2>We're Here to Help.</h2>
+
+            <p>
+                Your feedback helps us make DietSync
+                a better place for everyone.
+            </p>
+
+            <a href="/recipes/" class="btn btn-light">
+                Explore Recipes
+            </a>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
