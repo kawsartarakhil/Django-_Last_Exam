@@ -29,3 +29,4 @@ class NutritionProfile(models.Model):
 class EmailConfirmation(models.Model):
     user = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     token = models.UUIDField(default = uuid.uuid4)
+ 

@@ -2,9 +2,9 @@ from django.db.models import Q
 from django.shortcuts import render , redirect
 from .models import Recipe , GroceryItem,Favorite,MealSuggestion,ContactMessage
 from accounts.models import NutritionProfile
-from django.contrib.auth.decorators import login_required
 from groq import Groq
 from django.conf import settings
+from accounts.permissions import custom_permission_required,custom_login_required
 
 def home_view(request):
     recipes = Recipe.objects.filter(is_featured=True)[:4]
@@ -19,16 +19,16 @@ def recipes_view(request):
     if q:
         recipes = recipes.filter(title__icontains=q)
     if meal_type:
-        recipes = recipes.filter(meal_type=Recipe.MEAL_TYPES)
+        recipes = recipes.filter(meal_type=meal_type)
     if nutrition:
-        recipes = recipes.filter(nutrition_category=Recipe.CATEGORIES)
+        recipes = recipes.filter(nutrition_category=nutrition)
 
     return render(request, "recipes.html", {"recipes": recipes,"q": q,"meal_type": meal_type,"nutrition": nutrition,"meal_types": Recipe.MEAL_TYPES,"nutrition_categories": Recipe.CATEGORIES,})
 
 def about_view(request):
     return render(request, "about.html")
 
-@login_required
+@custom_login_required
 def dashboard_view(request):
     profile = NutritionProfile.objects.filter(user=request.user).first()
     recipes = Recipe.objects.filter(is_featured=True)[:4]
@@ -41,7 +41,7 @@ def dashboard_view(request):
 
     return render(request, "dashboard.html", {"profile": profile,"recipes": recipes,"favorites_count": favorites_count,"grocery_count": grocery_count,"bmi": bmi,})
 
-@login_required
+@custom_login_required
 def meal_suggestions_view(request):
     suggested_recipes = []
     ingredients_entered = ""
@@ -111,7 +111,7 @@ def meal_suggestions_view(request):
 
     return render(request, "meal_suggestions.html", {"suggested_recipes": suggested_recipes,"ingredients_entered": ingredients_entered,"generated_recipe": generated_recipe, "previous_suggestions": previous_suggestions,"error": error,})
 
-
+@custom_login_required
 def grocery_list_view(request):
     if request.method == "POST":
         action = request.POST.get("action")
@@ -141,7 +141,7 @@ def grocery_list_view(request):
     return render(request, "grocery_list.html", {"items": items})
 
 
-@login_required
+@custom_login_required
 def favorite_toggle_view(request, recipe_id):
     recipe = Recipe.objects.filter(id=recipe_id).first()
 
@@ -158,12 +158,12 @@ def favorite_toggle_view(request, recipe_id):
     return redirect("recipes")
 
 
-
+@custom_login_required
 def favorites_view(request):
     favorites = Favorite.objects.filter( user=request.user).select_related("recipe")
     return render(request, "favorites.html", {"favorites": favorites})
 
-
+@custom_login_required
 def profile_view(request):
     profile = NutritionProfile.objects.filter(user=request.user).first()
     error = ""

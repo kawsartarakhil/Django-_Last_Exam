@@ -4,6 +4,8 @@ from .helpers import custom_send_email_confirmation,send_reset_password_email
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from .permissions import custom_login_required
+from django.contrib.auth.models import Group
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -27,6 +29,8 @@ def register_view(request):
         if CustomUser.objects.filter(username=username).exists():
             return render(request,"register.html",{"error":"User with this username already exists"})
         user = CustomUser.objects.create_user(username=username,email=email,password=password2)
+        user_group = Group.objects.get(name='User')
+        user.groups.add(user_group)
         token = EmailConfirmation.objects.create(user=user)
         custom_send_email_confirmation(token=token)
         return HttpResponse("check your email")

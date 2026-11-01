@@ -28,6 +28,13 @@ class Recipe(models.Model):
     meal_type = models.CharField(max_length=20, choices=MEAL_TYPES, blank=True)
     nutrition_category = models.CharField(max_length=20, choices=CATEGORIES, blank=True)
 
+    class Meta:
+        permissions = [
+            ("can_manage_recipes", "Can manage recipes"),
+            ("can_feature_recipes", "Can feature recipes"),
+            ("can_view_all_recipes", "Can view all recipes"),
+        ]
+
     def __str__(self):
         return self.title
 
