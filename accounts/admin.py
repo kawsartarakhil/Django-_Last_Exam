@@ -40,3 +40,7 @@ class NutritionProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(EmailConfirmation)
+
+admin.site.site_header = "DietSync Administration"
+admin.site.site_title = "DietSync Admin"
+admin.site.index_title = "Welcome to DietSync Dashboard"

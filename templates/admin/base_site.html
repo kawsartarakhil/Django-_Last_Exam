@@ -1,0 +1,741 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}DietSync Administration{% endblock %}
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}">
+    <span class="brand-icon">D</span>
+    DietSync
+    <span class="brand-label">ADMINISTRATION</span>
+  </a>
+</div>
+{% endblock %}
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root,
+html[data-theme],
+html:not([data-theme]) {
+  color-scheme: light;
+  --brown: #8b5e45;
+  --brown-dark: #69432f;
+  --accent: #c99b78;
+  --bg: #f7f2e9;
+  --bg-soft: #eee7db;
+  --surface: #fffdf9;
+  --line: #e8dfd3;
+  --text: #302820;
+  --muted: #887d72;
+  --danger: #b96d61;
+  --success: #71866b;
+  --radius: 14px;
+  --shadow: 0 4px 18px rgba(48, 40, 32, 0.06);
+  --primary: var(--brown);
+  --secondary: var(--brown-dark);
+  --primary-fg: #fff;
+  --body-fg: var(--text);
+  --body-bg: var(--bg);
+  --body-quiet-color: var(--muted);
+  --body-loud-color: var(--text);
+  --header-color: var(--brown);
+  --header-branding-color: var(--brown-dark);
+  --header-bg: var(--surface);
+  --header-link-color: var(--brown);
+  --breadcrumbs-fg: var(--muted);
+  --breadcrumbs-link-fg: var(--brown);
+  --breadcrumbs-bg: transparent;
+  --link-fg: var(--brown);
+  --link-hover-color: var(--brown-dark);
+  --link-selected-fg: var(--brown-dark);
+  --hairline-color: var(--line);
+  --border-color: var(--line);
+  --error-fg: var(--danger);
+  --message-success-bg: #e9eee4;
+  --message-warning-bg: #f6edda;
+  --message-error-bg: #f5e5e1;
+  --darkened-bg: var(--bg-soft);
+  --selected-bg: #f3e9dc;
+  --selected-row: #f9efe2;
+  --button-fg: #fff;
+  --button-bg: var(--brown);
+  --button-hover-bg: var(--brown-dark);
+  --default-button-bg: var(--brown-dark);
+  --default-button-hover-bg: var(--brown);
+  --close-button-bg: var(--muted);
+  --close-button-hover-bg: var(--text);
+  --delete-button-bg: var(--danger);
+  --delete-button-hover-bg: #914c43;
+  --object-tools-fg: #fff;
+  --object-tools-bg: var(--brown);
+  --object-tools-hover-bg: var(--brown-dark);
+}
+.theme-toggle {
+  display: none !important;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+}
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  color: var(--text);
+}
+a:link,
+a:visited {
+  color: var(--brown);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--brown-dark);
+}
+#header {
+  background: var(--surface);
+  color: var(--text);
+  padding: 16px 35px;
+  border-bottom: 1px solid var(--line);
+}
+#site-name a:link,
+#site-name a:visited {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--brown-dark);
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+}
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--brown);
+  color: #fff;
+  border-radius: 10px;
+  font-style: normal;
+  font-size: 20px;
+}
+.brand-label {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+#user-tools,
+#user-tools a:link,
+#user-tools a:visited {
+  color: var(--muted);
+  font-size: 12px;
+}
+#user-tools a:link,
+#user-tools a:visited {
+  color: var(--brown);
+  border-bottom: 1px solid var(--line);
+}
+#user-tools a:hover {
+  color: var(--brown-dark);
+  border-color: var(--brown);
+}
+div.breadcrumbs {
+  background: transparent;
+  color: var(--muted);
+  padding: 14px 35px;
+  font-size: 12px;
+  border: none;
+}
+div.breadcrumbs a {
+  color: var(--brown);
+}
+#nav-sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+}
+#nav-sidebar .module {
+  border-radius: var(--radius);
+  margin: 8px 10px;
+}
+#nav-sidebar .module th,
+#nav-sidebar .module td {
+  background: transparent;
+}
+#nav-sidebar .current-model {
+  background: var(--selected-bg);
+}
+#nav-sidebar .current-model a {
+  color: var(--brown-dark);
+  font-weight: 700;
+}
+#nav-filter {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+.toggle-nav-sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  color: var(--brown);
+}
+#content {
+  padding: 28px 35px;
+}
+#content h1 {
+  font-size: 2rem;
+  font-style: italic;
+  margin-bottom: 22px;
+}
+.module {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+.module h2,
+.module caption,
+.inline-group h2 {
+  background: var(--bg-soft);
+  color: var(--brown-dark);
+  padding: 14px 18px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+.module h2 a,
+.module caption a {
+  color: var(--brown-dark);
+}
+.module th,
+.module td {
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+.module tr:last-child th,
+.module tr:last-child td {
+  border-bottom: none;
+}
+.module tr:hover td,
+.module tr:hover th {
+  background: #faf6ee;
+}
+.addlink,
+.changelink {
+  font-weight: 600;
+}
+.object-tools a:link,
+.object-tools a:visited {
+  background: var(--brown);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.object-tools a:hover {
+  background: var(--brown-dark);
+  transform: translateY(-2px);
+}
+#changelist {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+#changelist .changelist-form-container {
+  background: transparent;
+}
+#changelist #toolbar {
+  background: var(--surface);
+  padding: 16px 20px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+}
+#changelist #toolbar form input[type="text"] {
+  min-width: 260px;
+}
+#changelist #toolbar form #searchbar {
+  border-radius: 999px;
+  padding: 10px 18px;
+}
+#changelist .actions {
+  background: var(--bg-soft);
+  color: var(--text);
+  padding: 12px 20px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+}
+#changelist .actions select {
+  min-width: 160px;
+}
+#changelist table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+}
+#changelist table thead th {
+  background: var(--bg-soft);
+  color: var(--brown-dark);
+  padding: 13px 14px;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+#changelist table thead th a,
+#changelist table thead th .text a {
+  color: var(--brown-dark);
+}
+#changelist table thead th.sorted {
+  background: #e6dccb;
+}
+#changelist table tbody tr,
+.row1,
+.row2 {
+  background: var(--surface);
+}
+#changelist table tbody td,
+#changelist table tbody th {
+  padding: 14px;
+  color: var(--text);
+  border-bottom: 1px solid var(--line);
+}
+#changelist table tbody tr:hover {
+  background: #faf6ee;
+}
+#changelist table tbody tr.selected {
+  background: var(--selected-row);
+}
+#changelist .paginator {
+  background: var(--surface);
+  color: var(--muted);
+  padding: 14px 20px;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+.paginator a:link,
+.paginator a:visited,
+.paginator .this-page {
+  border-radius: 8px;
+  padding: 5px 11px;
+}
+.paginator a:link,
+.paginator a:visited {
+  background: var(--bg-soft);
+  color: var(--brown-dark);
+}
+.paginator a:hover {
+  background: var(--brown);
+  color: #fff;
+}
+.paginator .this-page {
+  background: var(--brown-dark);
+  color: #fff;
+}
+#changelist-filter {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 0 0 0 20px;
+}
+#changelist-filter h2 {
+  background: var(--brown-dark);
+  color: #fff;
+  padding: 14px 18px;
+  margin: 0;
+}
+#changelist-filter h3 {
+  color: var(--brown-dark);
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 12px 18px 4px;
+}
+#changelist-filter li {
+  padding: 5px 18px;
+}
+#changelist-filter li.selected {
+  border-left: 3px solid var(--brown);
+  background: var(--selected-bg);
+}
+#changelist-filter li.selected a {
+  color: var(--brown-dark);
+  font-weight: 700;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-family: "DM Sans", sans-serif;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 155, 120, 0.2);
+}
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--brown);
+}
+label {
+  color: var(--text);
+  font-weight: 600;
+}
+fieldset.module {
+  padding-bottom: 6px;
+}
+.form-row {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.form-row:last-child {
+  border-bottom: none;
+}
+.help,
+.helptext,
+form .form-row p.help {
+  color: var(--muted);
+  font-size: 12px;
+}
+.errornote,
+ul.errorlist {
+  color: var(--danger);
+}
+.errornote {
+  background: #f5e5e1;
+  border: 1px solid #e8c9c2;
+  border-radius: 10px;
+}
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+  background: var(--brown);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+a.button:hover {
+  background: var(--brown-dark);
+  transform: translateY(-2px);
+}
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+  background: var(--brown-dark);
+}
+.button.default:hover,
+input[type="submit"].default:hover {
+  background: var(--brown);
+}
+#changelist .actions .button {
+  padding: 8px 18px;
+}
+.submit-row {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+.submit-row a.deletelink:link,
+.submit-row a.deletelink:visited {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 999px;
+  padding: 10px 20px;
+}
+.submit-row a.deletelink:hover {
+  background: var(--danger);
+  color: #fff;
+}
+ul.messagelist li {
+  border-radius: 10px;
+  margin: 12px 0;
+  padding: 13px 18px;
+  font-weight: 500;
+}
+ul.messagelist li.success {
+  background: #e9eee4;
+  color: #536b4d;
+}
+ul.messagelist li.warning {
+  background: #f6edda;
+  color: #896a32;
+}
+ul.messagelist li.error {
+  background: #f5e5e1;
+  color: var(--danger);
+}
+.selector-available h2,
+.selector-chosen h2 {
+  background: var(--bg-soft);
+  color: var(--brown-dark);
+}
+.selector .selector-chosen h2 {
+  background: var(--brown);
+  color: #fff;
+}
+.calendar caption,
+.calendarbox h2 {
+  background: var(--brown);
+  color: #fff;
+}
+#toolbar,
+.actions,
+.paginator {
+  color: var(--text);
+}
+body.login {
+  background: var(--bg);
+}
+.login #container {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(111, 58, 32, 0.12);
+  overflow: hidden;
+  width: 26em;
+}
+.login #header {
+  justify-content: center;
+}
+.login #content {
+  padding: 28px;
+}
+.login .form-row {
+  border: none;
+  padding: 10px 0;
+}
+.login .submit-row {
+  border: none;
+  box-shadow: none;
+  padding: 10px 0 0;
+}
+#footer {
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 11px;
+}
+@media (max-width: 767px) {
+  #header {
+    padding: 14px 16px;
+  }
+  #content {
+    padding: 20px 14px;
+  }
+  div.breadcrumbs {
+    padding: 12px 16px;
+  }
+  #changelist-filter {
+    margin: 20px 0 0;
+  }
+  .brand-label {
+    display: none;
+  }
+}
+#header,
+div.breadcrumbs {
+  padding-left: max(35px, calc((100% - 1280px) / 2));
+  padding-right: max(35px, calc((100% - 1280px) / 2));
+}
+#user-tools {
+  margin-left: auto;
+}
+.main > .content,
+#content {
+  flex: 1;
+  min-width: 0;
+  max-width: 1280px;
+  width: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.dashboard #content {
+  width: auto;
+}
+#content-main {
+  float: none;
+  width: auto;
+}
+.colMS {
+  margin-right: 0;
+}
+@media (min-width: 1025px) {
+  .dashboard #content,
+  .colMS#content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 0 28px;
+    align-items: start;
+  }
+  .dashboard #content > h1,
+  .dashboard #content > .breadcrumbs,
+  .colMS#content > h1 {
+    grid-column: 1 / -1;
+  }
+  .dashboard #content-main,
+  .colMS#content #content-main {
+    grid-column: 1;
+  }
+  #content-related {
+    grid-column: 2;
+    float: none;
+    width: auto;
+    margin: 0;
+    background: transparent;
+  }
+}
+#content-related .module,
+#recent-actions-module {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+#content-related h2,
+#recent-actions-module h2 {
+  background: var(--bg-soft);
+  color: var(--brown-dark);
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 14px 18px;
+  margin: 0;
+}
+#content-related h3 {
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  padding: 16px 18px 0;
+  margin: 0;
+}
+#content-related ul {
+  padding: 8px 18px 16px;
+  margin: 0;
+}
+#content-related .actionlist li,
+.actionlist li {
+  background: transparent;
+  color: var(--text);
+}
+.actionlist .mini.quiet,
+#content-related .quiet {
+  color: var(--muted);
+}
+.dashboard .module table th,
+.dashboard .module table td {
+  background: transparent;
+}
+#toolbar,
+#changelist #toolbar,
+#changelist .actions,
+.paginator,
+#changelist .paginator,
+#changelist table tbody tr,
+#changelist-filter,
+#changelist-filter ul,
+.module table,
+.module tr,
+.row1,
+.row2,
+.results {
+  background-color: var(--surface);
+}
+#changelist .actions,
+#changelist table thead th {
+  background-color: var(--bg-soft);
+}
+#toolbar #searchbar,
+.actions select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+#toolbar form > div > label {
+  color: var(--muted);
+}
+#changelist .paginator .paginator-count,
+.paginator {
+  background: var(--surface);
+  color: var(--muted);
+}
+.dashboard .module tr:hover td,
+.dashboard .module tr:hover th,
+#changelist table tbody tr:hover {
+  background-color: #faf6ee;
+}
+.dashboard .module td a,
+.dashboard .module th a {
+  color: var(--brown);
+}
+.dashboard .module th a {
+  color: var(--text);
+  font-weight: 600;
+}
+a.addlink,
+a.changelink,
+.addlink,
+.changelink {
+  color: var(--brown);
+}
+.addlink::before,
+.changelink::before {
+  filter: none;
+}
+.quiet,
+.dashboard .module caption a {
+  color: var(--muted);
+}
+</style>
+{% endblock %}
