@@ -28,18 +28,33 @@ def recipes_view(request):
 def about_view(request):
     return render(request, "about.html")
 
+
 @custom_login_required
 def dashboard_view(request):
     profile = NutritionProfile.objects.filter(user=request.user).first()
     recipes = Recipe.objects.filter(is_featured=True)[:4]
     favorites_count = Favorite.objects.filter(user=request.user).count()
     grocery_count = GroceryItem.objects.filter(user=request.user,is_purchased=False).count()
+
     bmi = None
+    water_intake = None
+
     if profile and profile.height > 0:
         height_in_meters = profile.height / 100
         bmi = round(profile.weight / (height_in_meters ** 2), 1)
 
-    return render(request, "dashboard.html", {"profile": profile,"recipes": recipes,"favorites_count": favorites_count,"grocery_count": grocery_count,"bmi": bmi,})
+    if profile and profile.weight > 0:
+        water_intake = round((profile.weight * 30) / 1000, 1)
+
+    return render(request, "dashboard.html", {
+        "profile": profile,
+        "recipes": recipes,
+        "favorites_count": favorites_count,
+        "grocery_count": grocery_count,
+        "bmi": bmi,
+        "water_intake": water_intake,
+    })
+
 
 @custom_login_required
 def meal_suggestions_view(request):
@@ -55,17 +70,29 @@ def meal_suggestions_view(request):
         if ingredients_entered:
 
             if action == "match":
-                ingredients = [item.strip() for item in ingredients_entered.split(",") if item.strip()]
-                query = Q()
-                for ingredient in ingredients:
-                    query |= Q(ingredients__icontains=ingredient)
-                suggested_recipes = Recipe.objects.filter(query).distinct()[:10]
 
-                for recipe in suggested_recipes:
-                    MealSuggestion.objects.create(user=request.user,ingredients_entered=ingredients_entered,recipe=recipe)
+                if "," not in ingredients_entered:
+                    error = "Please separate your ingredients with commas. Example: chicken, rice, carrots."
 
-                if not suggested_recipes:
-                    error = "No matching recipes found."
+                else:
+                    ingredients = [item.strip() for item in ingredients_entered.split(",") if item.strip()]
+
+                    query = Q()
+
+                    for ingredient in ingredients:
+                        query |= Q(ingredients__icontains=ingredient)
+
+                    suggested_recipes = Recipe.objects.filter(query).distinct()[:10]
+
+                    for recipe in suggested_recipes:
+                        MealSuggestion.objects.create(
+                        user=request.user,
+                        ingredients_entered=ingredients_entered,
+                        recipe=recipe
+                    )
+
+                    if not suggested_recipes:
+                        error = "No matching recipes found."
 
             elif action == "generate":
                 if not settings.GROQ_API_KEY:

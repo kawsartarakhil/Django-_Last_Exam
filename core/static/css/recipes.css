@@ -268,4 +268,137 @@
     background: #ead2ca;
 }
 
+/* RESPONSIVE RECIPES PAGE */
 
+@media (max-width: 900px) {
+    .rp-container {
+        padding: 0 20px;
+    }
+
+    .rp-header {
+        gap: 20px;
+    }
+
+    .rp-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .rp-body {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 650px) {
+    .recipes-page {
+        padding: 40px 0 60px;
+    }
+
+    .rp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding-bottom: 25px;
+    }
+
+    .rp-header-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .rp-count {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+    }
+
+    .rp-count strong {
+        font-size: 1.5rem;
+    }
+
+    .rp-controls {
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+    .rp-search {
+        max-width: none;
+        width: 100%;
+    }
+
+    .rp-search input[type="text"] {
+        min-width: 0;
+        padding: 12px 16px;
+    }
+
+    .rp-search button {
+        padding: 12px 20px;
+    }
+
+    .rp-filter-group {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rp-filter-label {
+        min-width: 0;
+    }
+
+    .rp-pills {
+        gap: 8px;
+    }
+
+    .rp-pill {
+        padding: 8px 15px;
+        font-size: 0.75rem;
+    }
+
+    .rp-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .rp-body {
+        padding: 20px;
+    }
+
+    .rp-empty {
+        padding: 45px 18px;
+    }
+}
+
+@media (max-width: 380px) {
+    .rp-container {
+        padding: 0 15px;
+    }
+
+    .rp-header-text h1 {
+        font-size: 2.1rem;
+    }
+
+    .rp-search {
+        flex-direction: column;
+    }
+
+    .rp-search button {
+        width: 100%;
+    }
+
+    .rp-pill {
+        padding: 8px 12px;
+    }
+
+    .rp-body h3 {
+        font-size: 1.2rem;
+    }
+
+    .rp-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .favorite-button {
+        font-size: 13px;
+    }
+}

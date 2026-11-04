@@ -389,3 +389,128 @@ main,
         animation: none !important;
     }
 }
+
+
+
+/* TABLETS */
+@media (max-width: 768px) {
+
+    .container {
+        padding: 0 18px;
+    }
+
+    .header-content {
+        gap: 15px;
+    }
+
+    nav {
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .auth-container {
+        max-width: 450px;
+        padding: 32px;
+        margin: 20px auto 45px;
+    }
+
+    .auth-container h1 {
+        font-size: 2rem;
+    }
+
+    .orb-one {
+        width: 220px;
+        height: 220px;
+    }
+
+    .orb-two {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    .auth-intro {
+        padding: 28px 15px 5px;
+    }
+
+    .auth-container {
+        width: calc(100% - 30px);
+        padding: 24px 20px;
+        margin: 18px auto 35px;
+    }
+
+    .auth-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .auth-container input {
+        font-size: 16px;
+        padding: 13px;
+    }
+
+    .auth-footer {
+        padding: 20px 12px;
+    }
+
+    .bg-orb {
+        filter: blur(35px);
+        opacity: 0.4;
+    }
+
+    .orb-one {
+        width: 160px;
+        height: 160px;
+    }
+
+    .orb-two {
+        width: 180px;
+        height: 180px;
+    }
+
+    .orb-three {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 350px) {
+
+    nav {
+        gap: 9px;
+    }
+
+    .auth-container {
+        padding: 20px 15px;
+    }
+
+    .auth-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+}

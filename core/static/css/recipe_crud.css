@@ -406,3 +406,163 @@
     color: #a34e42;
 }
 
+/* RESPONSIVE MANAGE PAGE */
+
+@media (max-width: 768px) {
+    .manage-page {
+        padding: 45px 20px 70px;
+    }
+
+    .manage-container {
+        max-width: 100%;
+    }
+
+    .manage-card {
+        padding: 32px 25px;
+    }
+
+    .manage-heading {
+        margin-bottom: 30px;
+    }
+
+    .form-grid {
+        gap: 15px;
+    }
+
+    .confirmation-card {
+        margin: 70px auto;
+        padding: 45px 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .manage-page {
+        min-height: 100vh;
+        padding: 30px 15px 50px;
+    }
+
+    .manage-page::before {
+        width: 250px;
+        height: 250px;
+    }
+
+    .manage-page::after {
+        width: 280px;
+        height: 280px;
+    }
+
+    .back-link {
+        margin-bottom: 25px;
+        font-size: 0.9rem;
+    }
+
+    .manage-heading {
+        margin-bottom: 25px;
+    }
+
+    .manage-heading h1 {
+        font-size: 2.4rem;
+    }
+
+    .manage-heading p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 2px;
+    }
+
+    .manage-card {
+        padding: 25px 18px;
+        border-radius: 22px;
+    }
+
+    .form-section {
+        padding-bottom: 24px;
+        margin-bottom: 24px;
+    }
+
+    .form-section h2 {
+        font-size: 1.35rem;
+        margin-bottom: 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 13px;
+        font-size: 0.9rem;
+    }
+
+    .current-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .form-actions form {
+        width: 100%;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger {
+        width: 100%;
+        padding: 13px 20px;
+    }
+
+    .confirmation-card {
+        margin: 45px auto;
+        padding: 35px 20px;
+        border-radius: 22px;
+    }
+
+    .confirmation-icon {
+        width: 65px;
+        height: 65px;
+        font-size: 2.1rem;
+    }
+
+    .confirmation-card h1 {
+        font-size: 2rem;
+    }
+
+    .confirmation-card p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 350px) {
+    .manage-card {
+        padding: 22px 14px;
+    }
+
+    .manage-heading h1 {
+        font-size: 2.1rem;
+    }
+
+    .form-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .confirmation-card {
+        padding: 30px 15px;
+    }
+}

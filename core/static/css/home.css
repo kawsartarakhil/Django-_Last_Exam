@@ -294,3 +294,158 @@ section {
 }
  
 
+/* Responsive Layout */
+
+@media (max-width: 1024px) {
+    .hero-grid {
+        gap: 35px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recipe-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .steps-grid {
+        gap: 18px;
+    }
+
+    .step {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .hero {
+        padding: 50px 0 65px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-image {
+        max-width: 520px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .section-head {
+        margin-bottom: 35px;
+    }
+
+    .section-head-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-box {
+        padding: 55px 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    section {
+        padding: 45px 0;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: 35px 0 50px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+        margin-bottom: 18px;
+    }
+
+    .hero-text p {
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons .btn {
+        text-align: center;
+    }
+
+    .hero-image {
+        aspect-ratio: 4 / 3.5;
+    }
+
+    .feature-grid,
+    .recipe-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .feature-card,
+    .step {
+        padding: 22px;
+    }
+
+    .recipe-body {
+        padding: 18px;
+    }
+
+    .cta-box {
+        padding: 45px 18px;
+        border-radius: 20px;
+    }
+
+    .empty-state {
+        padding: 40px 18px;
+    }
+}
+
+@media (max-width: 350px) {
+    .hero-text h1 {
+        font-size: 2.1rem;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.88rem;
+    }
+
+    .feature-card,
+    .step {
+        padding: 18px;
+    }
+}

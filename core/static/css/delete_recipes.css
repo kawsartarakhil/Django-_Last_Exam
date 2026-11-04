@@ -126,3 +126,93 @@
         transform: translateY(0) scale(1);
     }
 }
+
+/* Responsive Deleted Recipes Page */
+
+@media (max-width: 768px) {
+    .deleted-page {
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .deleted-header {
+        margin-bottom: 30px;
+    }
+
+    .deleted-header h1 {
+        font-size: 34px;
+    }
+
+    .deleted-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .deleted-card {
+        padding: 20px;
+    }
+
+    .deleted-card h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .deleted-page {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .deleted-header {
+        margin-bottom: 25px;
+    }
+
+    .deleted-header h1 {
+        font-size: 29px;
+    }
+
+    .deleted-header p {
+        font-size: 14px;
+    }
+
+    .deleted-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .deleted-card {
+        padding: 20px;
+    }
+
+    .deleted-card h3 {
+        font-size: 19px;
+        margin-bottom: 17px;
+    }
+
+    .deleted-actions {
+        gap: 8px;
+    }
+
+    .deleted-actions a {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .deleted-empty {
+        padding: 45px 15px;
+    }
+
+    .deleted-empty h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 350px) {
+    .deleted-actions {
+        flex-direction: column;
+    }
+
+    .deleted-actions a {
+        text-align: center;
+    }
+}

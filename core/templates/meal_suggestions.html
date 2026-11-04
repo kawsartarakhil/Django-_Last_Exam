@@ -18,13 +18,11 @@
 
         <label for="ingredients">Your ingredients</label>
 
-        <textarea
-            id="ingredients"
-            name="ingredients"
-            placeholder="Example: chicken, rice, carrots"
-            required
-        >{{ ingredients_entered }}</textarea>
-
+        <textarea id="ingredients" name="ingredients" placeholder="Example: chicken, rice, carrots" required>{{ ingredients_entered }}</textarea>
+        <p class="ingredient-hint">
+            Separate each ingredient with a comma (,).
+            Example: chicken, rice, carrots
+        </p>
         <div class="meal-buttons">
             <button type="submit" name="action" value="match" class="match-button">
                 Find Existing Recipes
@@ -79,39 +77,6 @@
         </div>
     {% endif %}
 
-    <div class="meal-section">
-        <h2>Previous Suggestions</h2>
 
-        {% for suggestion in previous_suggestions %}
-
-            <div class="previous-suggestion">
-
-                <p>
-                    <strong>Ingredients:</strong>
-                    {{ suggestion.ingredients_entered }}
-                </p>
-
-                {% if suggestion.recipe %}
-                    <h3>{{ suggestion.recipe.title }}</h3>
-                    <p>{{ suggestion.recipe.description }}</p>
-
-                {% elif suggestion.generated_recipe %}
-                    <span class="ai-recipe-label">AI GENERATED</span>
-                    <div class="ai-recipe-content">
-                        {{ suggestion.generated_recipe|linebreaks }}
-                    </div>
-
-                {% else %}
-                    <p>No matching recipe was found.</p>
-                {% endif %}
-
-            </div>
-
-        {% empty %}
-            <p class="meal-empty">You haven't made any suggestions yet.</p>
-        {% endfor %}
-    </div>
-
-</div>
 
 {% endblock %}

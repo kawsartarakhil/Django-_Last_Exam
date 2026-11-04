@@ -15,6 +15,11 @@
 <header class="site-header">
 <div class="site-header-inner">
 <a href="/" class="logo">Diet<span>Sync</span></a>
+<button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
 <nav class="site-nav">
 <a href="/">Home</a>
 <a href="{% url 'recipes' %}">Recipes</a>
@@ -48,5 +53,18 @@
 <p>&copy; 2026 DietSync. All rights reserved.</p>
 </div>
 </footer>
+
+<script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const siteNav = document.querySelector(".site-nav");
+
+    menuToggle.addEventListener("click", function () {
+        siteNav.classList.toggle("active");
+
+        const isOpen = siteNav.classList.contains("active");
+
+        menuToggle.setAttribute("aria-expanded", isOpen);
+    });
+</script>
 </body>
 </html>

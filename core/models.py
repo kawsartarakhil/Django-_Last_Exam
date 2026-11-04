@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class RecipeManager(models.Manager):
@@ -50,8 +51,6 @@ class Recipe(models.Model):
     all_objects = models.Manager()
 
     def delete(self):
-        from django.utils import timezone
-
         self.is_deleted = True
         self.deleted_at = timezone.now()
         self.save()

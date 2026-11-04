@@ -143,3 +143,124 @@
     gap: 12px;
     margin-top: 20px;
 }
+
+/* RESPONSIVE RECIPE DETAIL */
+
+@media (max-width: 900px) {
+    .rd-container {
+        padding: 0 20px;
+    }
+
+    .rd-main {
+        gap: 30px;
+    }
+
+    .rd-image {
+        height: 320px;
+    }
+
+    .rd-nutrition {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rd-content {
+        gap: 18px;
+    }
+
+    .rd-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 650px) {
+    .recipe-detail {
+        padding: 35px 0 55px;
+    }
+
+    .rd-main {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .rd-image {
+        height: 300px;
+    }
+
+    .rd-info h1 {
+        font-size: 2.3rem;
+    }
+
+    .rd-description {
+        font-size: 0.95rem;
+        margin-bottom: 22px;
+    }
+
+    .rd-content {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
+        gap: 18px;
+    }
+
+    .rd-card {
+        padding: 24px;
+    }
+
+    .rd-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .recipe-management {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .rd-container {
+        padding: 0 15px;
+    }
+
+    .recipe-detail {
+        padding-top: 25px;
+    }
+
+    .rd-image {
+        height: 240px;
+        border-radius: 18px;
+    }
+
+    .rd-info h1 {
+        font-size: 2rem;
+    }
+
+    .rd-tag {
+        font-size: 0.78rem;
+    }
+
+    .rd-nutrition {
+        gap: 9px;
+    }
+
+    .rd-nutrition div {
+        padding: 12px 6px;
+    }
+
+    .rd-nutrition strong {
+        font-size: 1rem;
+    }
+
+    .rd-nutrition span {
+        font-size: 0.72rem;
+    }
+
+    .favorite-button {
+        width: 100%;
+    }
+
+    .rd-card {
+        padding: 20px 17px;
+    }
+
+    .rd-card h2 {
+        font-size: 1.4rem;
+    }
+}

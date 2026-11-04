@@ -265,6 +265,7 @@ body {
     border: 1px solid #E8DFD1;
     border-radius: 12px;
     padding: 22px;
+    width: 220px;
     text-decoration: none;
     color: #31543D;
     transition: 0.2s;
@@ -820,4 +821,509 @@ body {
     color: #a34e3b;
     border-radius: 8px;
     margin-bottom: 20px;
+}
+
+
+
+/* Water Intake Card */
+
+.water-card {
+    background: linear-gradient(120deg, #E5F1E9, #F5FAF5);
+    border: 1px solid #D3E5D8;
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.water-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(49, 84, 61, 0.09);
+}
+
+.water-label {
+    color: #8B6248;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.water-info h3 {
+    font-size: 36px;
+    color: #31543D;
+    margin: 12px 0;
+}
+
+.water-info p {
+    color: #52624F;
+    margin-bottom: 12px;
+}
+
+.water-info small {
+    color: #777363;
+    font-size: 12px;
+    line-height: 1.6;
+    display: block;
+    max-width: 450px;
+}
+
+.water-icon {
+    font-size: 65px;
+    background: #FFFFFF;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(49, 84, 61, 0.08);
+    animation: waterFloat 3s ease-in-out infinite;
+}
+
+@keyframes waterFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.ingredient-hint {
+    color: #777363;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+    .sidebar {
+        width: 210px;
+        padding: 25px 15px;
+    }
+
+    .dashboard-main {
+        padding: 25px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .profile-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-links a {
+        width: 100%;
+    }
+}
+
+/* SMALL TABLETS */
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 18px;
+        border-right: none;
+        border-bottom: 1px solid #E8DFD1;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sidebar-nav a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .sidebar-bottom {
+        margin-top: 15px;
+    }
+
+    .dashboard-main {
+        padding: 25px 20px;
+    }
+
+    .welcome-section {
+        gap: 20px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .water-card {
+        padding: 22px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .dashboard-main {
+        padding: 20px 15px;
+    }
+
+    .dashboard-header h2 {
+        font-size: 23px;
+    }
+
+    .sidebar-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar-nav a {
+        text-align: center;
+        font-size: 13px;
+        padding: 11px 8px;
+    }
+
+    .welcome-section {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .welcome-section h1 {
+        font-size: 23px;
+    }
+
+    .edit-profile-btn {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .stat-card,
+    .info-card,
+    .bmi-card {
+        padding: 20px;
+    }
+
+    .profile-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .recipe-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .recipe-card img {
+        height: 200px;
+    }
+
+    .quick-links {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-links a {
+        width: 100%;
+    }
+
+    .section-heading {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .meal-intro h2 {
+        font-size: 24px;
+    }
+
+    .ingredient-form {
+        padding: 20px;
+    }
+
+    .meal-buttons {
+        flex-direction: column;
+    }
+
+    .meal-buttons button {
+        width: 100%;
+    }
+
+    .meal-recipe-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-recipe-card img {
+        height: 200px;
+    }
+
+    .ai-recipe-card {
+        padding: 20px;
+    }
+
+    .grocery-container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .grocery-form {
+        flex-direction: column;
+    }
+
+    .grocery-form input,
+    .grocery-form button {
+        width: 100%;
+    }
+
+    .grocery-item {
+        flex-wrap: wrap;
+        padding: 13px;
+    }
+
+    .favorites-container,
+    .profile-container {
+        margin: 20px auto;
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .favorite-card img {
+        height: 210px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .profile-delete-section {
+        padding: 20px;
+    }
+
+    .water-card {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .water-info h3 {
+        font-size: 29px;
+    }
+
+    .water-icon {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+        font-size: 42px;
+    }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 380px) {
+
+    .dashboard-main {
+        padding: 15px 12px;
+    }
+
+    .sidebar {
+        padding: 15px 12px;
+    }
+
+    .sidebar-nav {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .sidebar-nav a {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+
+    .welcome-section {
+        padding: 16px;
+    }
+
+    .welcome-section h1 {
+        font-size: 21px;
+    }
+
+    .profile-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .water-card {
+        align-items: flex-start;
+    }
+
+    .water-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        font-size: 34px;
+    }
+
+    .water-info h3 {
+        font-size: 25px;
+    }
+
+    .ingredient-form {
+        padding: 16px;
+    }
+
+    .grocery-container {
+        padding: 15px;
+    }
+}
+
+
+/* MOBILE SIDEBAR DRAWER */
+
+.sidebar-toggle,
+.sidebar-close,
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        display: block;
+    }
+
+    /* Hamburger button */
+
+    .dashboard-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .sidebar-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        padding: 9px;
+        background: #FFFFFF;
+        border: 1px solid #E8DFD1;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .sidebar-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #31543D;
+        border-radius: 5px;
+    }
+
+    /* Sliding sidebar */
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: min(280px, 85vw);
+        height: 100vh;
+        z-index: 1001;
+
+        display: flex;
+        flex-direction: column;
+
+        transform: translateX(-100%);
+        transition: transform 0.35s ease;
+
+        overflow-y: auto;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-logo {
+        margin-bottom: 25px;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sidebar-nav a {
+        text-align: left;
+        font-size: 14px;
+        padding: 13px 15px;
+    }
+
+    .sidebar-bottom {
+        margin-top: auto;
+        padding-top: 25px;
+    }
+
+    /* Close button */
+
+    .sidebar-close {
+        display: block;
+        position: absolute;
+        top: 25px;
+        right: 18px;
+        background: none;
+        border: none;
+        color: #31543D;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    /* Dark background behind drawer */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.4);
+        border: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .dashboard-main {
+        width: 100%;
+        padding: 20px 15px;
+    }
 }

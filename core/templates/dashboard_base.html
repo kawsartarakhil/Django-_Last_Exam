@@ -18,6 +18,9 @@
             <div class="sidebar-logo">
                 <h2>Diet Sync</h2>
             </div>
+            <button class="sidebar-close" id="sidebarClose" type="button">
+                &times;
+            </button>
 
             <nav class="sidebar-nav">
 
@@ -27,12 +30,13 @@
 
                 <a href="{% url 'recipes' %}">Recipes</a>
 
-                <a href="{% url 'favorites' %}">❤️ Favorites</a>
+                <a href="{% url 'favorites' %}"> &#9825; Favorites</a>
 
                 <a href="{% url 'grocery_list' %}">Grocery List</a> 
 
                 <a href="{% url 'profile' %}">My Profile</a> 
 
+                <a href="{% url 'home' %}">Home</a> 
             </nav>
 
             <div class="sidebar-bottom">
@@ -43,12 +47,21 @@
             </div>
 
         </aside>
+        <button class="sidebar-overlay" id="sidebarOverlay" type="button" aria-label="Close menu"></button>
 
         <main class="dashboard-main">
 
             <header class="dashboard-header">
-                <h2>{% block page_heading %}Dashboard{% endblock %}</h2>
-            </header>
+
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <h2>{% block page_heading %}Dashboard{% endblock %}</h2>
+
+</header>
 
             <section class="dashboard-content">
                 {% block content %}
@@ -58,6 +71,35 @@
         </main>
 
     </div>
+<script>
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarClose = document.getElementById("sidebarClose");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
 
+    function openSidebar() {
+        sidebar.classList.add("active");
+        sidebarOverlay.classList.add("active");
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove("active");
+        sidebarOverlay.classList.remove("active");
+    }
+
+    sidebarToggle.addEventListener("click", openSidebar);
+    sidebarClose.addEventListener("click", closeSidebar);
+    sidebarOverlay.addEventListener("click", closeSidebar);
+
+    document.querySelectorAll(".sidebar-nav a").forEach(function(link) {
+        link.addEventListener("click", closeSidebar);
+    });
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeSidebar();
+        }
+    });
+</script>
 </body>
 </html>

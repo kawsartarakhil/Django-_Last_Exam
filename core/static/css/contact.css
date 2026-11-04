@@ -229,3 +229,280 @@ section {
     background: var(--bg-soft);
 }
 
+/* TABLETS */
+@media (max-width: 900px) {
+
+    section {
+        padding: 60px 0;
+    }
+
+    .contact-hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .contact-hero-text h1 {
+        width: auto;
+        font-size: 3rem;
+    }
+
+    .contact-hero-image {
+        height: 260px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr 1.3fr;
+        gap: 20px;
+    }
+
+    .contact-form-card {
+        padding: 28px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .container {
+        padding: 0 18px;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    .section-head {
+        margin-bottom: 30px;
+    }
+
+    .contact-hero {
+        padding: 35px 0 50px;
+    }
+
+    .contact-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .contact-hero-text {
+        text-align: center;
+    }
+
+    .contact-hero-text h1 {
+        width: auto;
+        font-size: 2.6rem;
+        margin-bottom: 18px;
+    }
+
+    .contact-hero-text p {
+        font-size: 0.98rem;
+        margin: 0 auto;
+    }
+
+    .contact-hero-image {
+        height: 230px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .contact-info {
+        padding: 10px 5px;
+    }
+
+    .contact-info > p {
+        margin-bottom: 25px;
+    }
+
+    .contact-info-item {
+        margin-bottom: 20px;
+    }
+
+    .contact-form-card {
+        padding: 24px 20px;
+    }
+
+    .contact-field input,
+    .contact-field textarea {
+        padding: 13px;
+        font-size: 16px;
+    }
+
+    .contact-bottom-box {
+        padding: 45px 20px;
+        border-radius: 20px;
+    }
+
+    .contact-bottom-box p {
+        font-size: 0.95rem;
+    }
+}
+
+/* SMALL PHONES */
+@media (max-width: 380px) {
+
+    .container {
+        padding: 0 14px;
+    }
+
+    .contact-hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-hero-image {
+        height: 190px;
+    }
+
+    .contact-form-card {
+        padding: 20px 15px;
+    }
+
+    .contact-info h3,
+    .contact-form-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .contact-bottom-box {
+        padding: 35px 16px;
+    }
+}/* TABLETS */
+@media (max-width: 900px) {
+
+    section {
+        padding: 60px 0;
+    }
+
+    .contact-hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .contact-hero-text h1 {
+        width: auto;
+        font-size: 3rem;
+    }
+
+    .contact-hero-image {
+        height: 260px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr 1.3fr;
+        gap: 20px;
+    }
+
+    .contact-form-card {
+        padding: 28px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .container {
+        padding: 0 18px;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    .section-head {
+        margin-bottom: 30px;
+    }
+
+    .contact-hero {
+        padding: 35px 0 50px;
+    }
+
+    .contact-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .contact-hero-text {
+        text-align: center;
+    }
+
+    .contact-hero-text h1 {
+        width: auto;
+        font-size: 2.6rem;
+        margin-bottom: 18px;
+    }
+
+    .contact-hero-text p {
+        font-size: 0.98rem;
+        margin: 0 auto;
+    }
+
+    .contact-hero-image {
+        height: 230px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .contact-info {
+        padding: 10px 5px;
+    }
+
+    .contact-info > p {
+        margin-bottom: 25px;
+    }
+
+    .contact-info-item {
+        margin-bottom: 20px;
+    }
+
+    .contact-form-card {
+        padding: 24px 20px;
+    }
+
+    .contact-field input,
+    .contact-field textarea {
+        padding: 13px;
+        font-size: 16px;
+    }
+
+    .contact-bottom-box {
+        padding: 45px 20px;
+        border-radius: 20px;
+    }
+
+    .contact-bottom-box p {
+        font-size: 0.95rem;
+    }
+}
+
+/* SMALL PHONES */
+@media (max-width: 380px) {
+
+    .container {
+        padding: 0 14px;
+    }
+
+    .contact-hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-hero-image {
+        height: 190px;
+    }
+
+    .contact-form-card {
+        padding: 20px 15px;
+    }
+
+    .contact-info h3,
+    .contact-form-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .contact-bottom-box {
+        padding: 35px 16px;
+    }
+}

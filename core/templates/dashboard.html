@@ -107,6 +107,49 @@
 
     </div>
 
+    
+<div class="dashboard-section">
+
+    <h2>Your Daily Water Guide</h2>
+
+    <div class="water-card">
+
+        <div class="water-info">
+
+            <span class="water-label">DAILY WATER ESTIMATE</span>
+
+            {% if water_intake %}
+
+                <h3>{{ water_intake }} Liters</h3>
+
+                <p>
+                    Your estimated daily water amount based on your weight.
+                </p>
+
+            {% else %}
+
+                <h3>Not available</h3>
+
+                <p>Complete your nutrition profile to see your estimate.</p>
+
+            {% endif %}
+
+            <small>
+                This is a general estimate, not a fixed requirement.
+                Your needs may vary depending on activity, weather and health.
+            </small>
+
+        </div>
+
+        <div class="water-icon">
+            💧
+        </div>
+
+    </div>
+
+</div>
+
+
 </div>
 
 
